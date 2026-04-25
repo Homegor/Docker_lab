@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx
+    container_name: nginx-web-server
+    ports:
+      - "80:80"
+    volumes:
+      # Монтируем все сайты из папки sites
+      - ./sites/:/var/www/html/
+      # Монтируем кастомный конфиг
+      - ./config/:/etc/nginx/conf.d/
+    restart: unless-stopped
+
+networks:
+  web-network:
+    driver: bridge
