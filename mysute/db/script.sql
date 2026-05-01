@@ -1,10 +1,13 @@
--- Create user - создание нового пользователя
-CREATE USER 'egor'@'%' IDENTIFIED BY '123456';
-GRANT ALL PRIVILEGES ON *.* TO 'egor'@'%';
-FLUSH PRIVILEGES;
+-- init.sql
+-- Устанавливаем кодировку для сессии
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
 
 -- setup.sql - Создание тестовой базы данных и таблицы
-CREATE DATABASE IF NOT EXISTS test_db;
+CREATE DATABASE IF NOT EXISTS test_db
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
 USE test_db;
 
 -- Создаем тестовую таблицу users
@@ -14,11 +17,11 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(100) NOT NULL UNIQUE,
     age INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Вставляем тестовые данные
 INSERT INTO users (name, email, age) VALUES
-('Иван Петров', 'ivan@example.com', 25),
+('Ivan Petrov', 'ivan@example.com', 25),
 ('Мария Сидорова', 'maria@example.com', 30),
 ('Алексей Смирнов', 'alex@example.com', 28),
 ('Елена Козлова', 'elena@example.com', 35),
